@@ -1,43 +1,33 @@
-<p align="center"><a href="https://nodei.co/npm/discord-xp/"><img src="https://nodei.co/npm/discord-xp.png"></a></p>
-<p align="center"><img src="https://img.shields.io/npm/v/discord-xp"> <img src="https://img.shields.io/github/repo-size/MrAugu/discord-xp"> <img src="https://img.shields.io/npm/l/discord-xp"> <img src="https://img.shields.io/github/contributors/MrAugu/discord-xp"> <img src="https://img.shields.io/github/package-json/dependency-version/MrAugu/discord-xp/mongoose"> <a href="https://discord.gg/rk7cVyk"><img src="https://discordapp.com/api/guilds/630058179547627592/widget.png" alt="Discord server"/></a></p>
+<p align="center"><a href="https://nodei.co/npm/discord-xp-firebase/"><img src="https://nodei.co/npm/discord-xp-firebase"></a></p>
+<p align="center"><img src="https://img.shields.io/npm/v/discord-xp"> <img src="https://img.shields.io/github/repo-size/MrAugu/discord-xp-firebase"> <img src="https://img.shields.io/npm/l/discord-xp"> <img src="https://img.shields.io/github/contributors/MrAugu/discord-xp"> <img src="https://img.shields.io/github/package-json/dependency-version/MrAugu/discord-xp-firebase/mongoose"> <a href="https://discord.gg/GQ6HdXa"><img src="https://discordapp.com/api/guilds/630058179547627592/widget.png" alt="Discord server"/></a></p>
 
-# Discord-XP
+# Discord-XP-FireBase
 A lightweight and easy to use xp framework for discord bots, uses MongoDB.
 
 # Changelog
-- **22 November 2020** (v1.1.7) `WARNING: This semi-major version contains breaking changes in the way leaderboard computing function works.`
-1. Added an optional `fetchPosition` argument to the `Levels.fetch` which will add the leaderboard rank as the `position` property. Caution: Will be slower on larger servers.
-2. `Levels.computeLeaderboard` is now asynchronous and can take in a third parameter called `fetchUsers` which will fetch all users on the leaderboard. This parameter **does not** require additional Gateway Intents. Caution: Will be substantially slower if you do not have `Guild_Members` intent and catch some users beforehand. 
 
-- **16 July 2020** - Added `xpFor` method to calculate xp required for a specific level.
-```js
-/* xpFor Example */
-const Levels = require("discord-xp");
-// Returns the xp required to reach level 30.
-var xpRequired = Levels.xpFor(30);
-
-console.log(xpRequired); // Output: 90000
-```
+- **21.12.2020** (1.1.8) The discord-xp-firebase package is published as a fork of discord-xp. Aimed at working Discord.js and firebase from Google
 
 # Bugs, Glitches and Issues
-If you encounter any of those fell free to open an issue in our <a href="https://github.com/MrAugu/discord-xp/issues">github repository</a>.
+If you encounter any of those fell free to open an issue in our <a href="https://github.com/MrAugu/discord-xp-firebase/issues">github repository</a>.
 
 # Help
-If you need help feel free to join our <a href="https://discord.gg/rk7cVyk">discord server</a> to talk and help you with your code.
-# Download
-You can download it from npm:
+If you need help feel free to join our <a href="https://discord.gg/GQ6HdXa">discord server</a> to talk and help you with your code.
+# Installing
+You can install it from npm:
 ```cli
-npm i discord-xp
+npm i discord-xp-firebase
 ```
 
 # Setting Up
 First things first, we include the module into the project.
 ```js
-const Levels = require("discord-xp");
+const Levels = require("discord-xp-firebase");
 ```
-After that, you need to provide a valid mongo database url, and set it. You can do so by:
+After that, you need to provide a valid Service Account and install it. You can do this with:
 ```js
-Levels.setURL("mongodb://..."); // You only need to do this ONCE per process.
+const account = require('./ServiceAccount.json')
+Levels.setAccount(account); // You only need to do this ONCE per process.
 ```
 
 # Examples
@@ -69,11 +59,8 @@ client.on("message", async (message) => {
 
 ```js
 const target = message.mentions.users.first() || message.author; // Grab the target.
-
 const user = await Levels.fetch(target.id, message.guild.id); // Selects the target from the database.
-
 if (!user) return message.channel.send("Seems like this user has not earned any xp so far."); // If there isnt such user in the database, we send a message in general.
-
 message.channel.send(`> **${target.tag}** is currently level ${user.level}.`); // We show the level.
 ```
 
@@ -81,14 +68,10 @@ message.channel.send(`> **${target.tag}** is currently level ${user.level}.`); /
 
 ```js
 const rawLeaderboard = await Levels.fetchLeaderboard(message.guild.id, 10); // We grab top 10 users with most xp in the current server.
-
 if (rawLeaderboard.length < 1) return reply("Nobody's in leaderboard yet.");
-
-const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
-
-const lb = leaderboard.map(e => `${e.position}. ${e.username}#${e.discriminator}\nLevel: ${e.level}\nXP: ${e.xp.toLocaleString()}`); // We map the outputs.
-
-message.channel.send(`**Leaderboard**:\n\n${lb.join("\n\n")}`);
+const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard); // We process the leaderboard.
+const lb = leaderboard.map(e => `${e.position}. <@!${e.userID}>. Level: **${e.level}**. XP: **${e.xp.toLocaleString()}**`); // We map the outputs.
+message.channel.send(`**Leaderboard**:\n${lb.join("\n")}`);
 ```
 
 *Is time for you to get creative..*
@@ -194,7 +177,7 @@ Levels.fetchLeaderboard(<GuildID - String>, <Limit - Integer>);
 ```
 Promise<Array [Objects]>
 ```
-**computeLeaderboard** (**Updated recently!**)
+**computeLeaderboard**
 
 It returns a new array of object that include level, xp, guild id, user id, leaderboard position, username and discriminator.
 ```js
