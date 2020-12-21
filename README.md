@@ -1,6 +1,5 @@
 <p align="center"><a href="https://nodei.co/npm/discord-xp-firebase/"><img src="https://nodei.co/npm/discord-xp-firebase"></a></p>
-<p align="center"><a href="https://nodei.co/npm/discord-xp-firebase/"><img src="https://nodei.co/npm/discord-xp-firebase"></a></p>
-<p align="center"><img src="https://img.shields.io/npm/v/discord-xp"> <img src="https://img.shields.io/github/repo-size/MrAugu/discord-xp-firebase"> <img src="https://img.shields.io/npm/l/discord-xp"> <img src="https://img.shields.io/github/contributors/MrAugu/discord-xp"> <img src="https://img.shields.io/github/package-json/dependency-version/MrAugu/discord-xp-firebase/mongoose"> <a href="https://discord.gg/GQ6HdXa"><img src="https://discordapp.com/api/guilds/630058179547627592/widget.png" alt="Discord server"/></a></p>
+<p align="center"><img src="https://img.shields.io/npm/v/discord-xp"> <img src="https://img.shields.io/github/repo-size/Aiving/discord-xp"> <img src="https://img.shields.io/npm/l/discord-xp"> <img src="https://img.shields.io/github/contributors/Aiving/discord-xp"> <img src="https://img.shields.io/github/package-json/dependency-version/Aiving/discord-xp/firebase"> <a href="https://discord.gg/GQ6HdXa"><img src="https://discordapp.com/api/guilds/630058179547627592/widget.png" alt="Discord server"/></a></p>
 
 # Discord-XP-FireBase
 A lightweight and easy to use xp framework for discord bots, uses MongoDB.
