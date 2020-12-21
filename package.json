@@ -1,15 +1,16 @@
 {
-  "name": "discord-xp",
-  "version": "1.1.7",
-  "description": "A lightweight and easy to use economy framework for discord bots, uses MongoDB.",
+  "name": "discord-xp-firebase",
+  "version": "1.1.8",
+  "description": "A lightweight and easy to use economy framework for discord bots, uses FirebBase.",
   "main": "index.js",
   "dependencies": {
-    "mongoose": "^5.7.1"
+    "firebase": "^8.1.1",
+    "firebase-admin": "^9.4.1"
   },
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrAugu/discord-xp.git"
+    "url": "git+https://github.com/Aiving/discord-xp.git"
   },
   "keywords": [
     "discord",
@@ -22,17 +23,15 @@
     "discord-levels",
     "discord-xp",
     "xp",
-    "mongo",
-    "mongoose",
-    "mongodb",
+    "firebase",
     "discord-economy",
     "discord-eco",
     "framework"
   ],
-  "author": "MrAugu",
+  "author": "Aiving",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MrAugu/discord-xp/issues"
+    "url": "https://github.com/Aiving/discord-xp/issues"
   },
-  "homepage": "https://github.com/MrAugu/discord-xp#readme"
+  "homepage": "https://github.com/Aiving/discord-xp#readme"
 }
